@@ -1,23 +1,20 @@
-# Base image
-FROM python:3.8
+# Use Ubuntu as the base image
+FROM ubuntu:latest
 
-# Set the working directory inside the container
-WORKDIR /app
+# Set environment variable to avoid interaction during package installation
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Copy the requirements file
-COPY requirements.txt .
+# Update and install Apache
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install the project dependencies
-RUN pip install -r requirements.txt
+# Copy HTML file to Apache default root directory
+COPY index.html /var/www/html/index.html
 
-# Copy the application code into the container
-COPY . .
+# Expose port 80 for HTTP
+EXPOSE 80
 
-# Expose the port the Flask application will be listening on
-EXPOSE 5000
-
-# Set environment variables, if necessary
-# ENV MY_ENV_VAR=value
-
-# Run the Flask application
-CMD ["python", "app.py"]
+# Start Apache in the foreground
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
