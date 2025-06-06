@@ -2,8 +2,8 @@
 #!/bin/bash
 set -e
 
-# Define the container name
-CONTAINER_NAME="myapp"
+# Define the container nameyogeshpenumur/simple-python-flask-app
+CONTAINER_NAME=yogeshpenumur/simple-python-flask-app
 
 # Check if the container is running
 if docker ps -q -f name="$CONTAINER_NAME" | grep -q .; then
