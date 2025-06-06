@@ -1,14 +1,23 @@
-
 #!/bin/bash
+
 set -e
 
-# Define the container nameyogeshpenumur/simple-python-flask-app
-CONTAINER_NAME=yogeshpenumur/simple-python-flask-app
+IMAGE_NAME="yogeshpenumur/simple-python-flask-app"
 
-# Check if the container is running
-if docker ps -q -f name="$CONTAINER_NAME" | grep -q .; then
-  echo "Stopping and removing running container: $CONTAINER_NAME"
-  docker rm -f "$CONTAINER_NAME"
+echo "Looking for containers running image: $IMAGE_NAME"
+
+# Find container ID(s) using the image
+CONTAINER_IDS=$(docker ps -a --filter "ancestor=$IMAGE_NAME" --format "{{.ID}}")
+
+if [ -n "$CONTAINER_IDS" ]; then
+  echo "Stopping and removing the following container(s):"
+  echo "$CONTAINER_IDS"
+
+  # Stop containers (if running)
+  docker stop $CONTAINER_IDS || true
+
+  # Remove containers
+  docker rm $CONTAINER_IDS
 else
-  echo "No running container named $CONTAINER_NAME found."
+  echo "No containers found running image: $IMAGE_NAME"
 fi
