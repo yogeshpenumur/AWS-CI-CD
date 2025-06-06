@@ -25,5 +25,5 @@ echo "Pulling latest image: $IMAGE_NAME"
 docker pull "$IMAGE_NAME"
 
 # Run the new container
-echo "Starting new container: $CONTAINER_NAME"
+echo "Starting new container: $CONTAINER_NAME"  
 docker run -d --name "$CONTAINER_NAME" -p $PORT:9111 "$IMAGE_NAME"
