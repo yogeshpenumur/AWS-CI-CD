@@ -1,36 +1,16 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    padding-top: 40px;
+    background-color: #f9f9f9;
 }
 
 h2 {
-    text-align: center;
-    margin-bottom: 30px;
     color: #333;
 }
 
-.container {
-    max-width: 700px;
-    margin: auto;
-    background-color: #fff;
-    padding: 30px;
+.card {
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-.input-group input {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-.input-group .btn {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.list-group-item {
-    font-size: 1.1rem;
-    border-radius: 8px !important;
-    margin-bottom: 10px;
+.navbar-brand {
+    font-weight: bold;
 }
