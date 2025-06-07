@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>College Portal</title>
-
-    <!-- Link to static CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <!-- Optional: Bootstrap CDN for responsiveness -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>{% block title %}Online Calculator{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-
-    <!-- Navbar with College Logo -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="College Logo" height="40">
-                My College
-            </a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/student/login">Student Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/staff/login">Staff Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Page Content -->
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-info">{{ message }}</div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-        
-        {% block content %}{% endblock %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('calculator') }}">CalcApp</a>
+    <div>
+      {% if current_user.is_authenticated %}
+        <span class="me-2">Hello, {{ current_user.username }}!</span>
+        <a class="btn btn-outline-primary me-2" href="{{ url_for('history') }}">History</a>
+        <a class="btn btn-outline-danger" href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a class="btn btn-outline-success me-2" href="{{ url_for('login') }}">Login</a>
+        <a class="btn btn-outline-secondary" href="{{ url_for('register') }}">Register</a>
+      {% endif %}
     </div>
-
-    <!-- Optional: Bootstrap & JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Your custom JS -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </div>
+</nav>
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

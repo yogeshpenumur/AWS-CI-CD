@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Calculator{% endblock %}
+{% block content %}
+<h2>Online Calculator</h2>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.expression.label(class="form-label") }}
+    {{ form.expression(class="form-control", placeholder="Enter expression like 2+3*5 or sqrt(9)") }}
+  </div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+
+{% if result is not none %}
+  <div class="alert alert-success mt-3">Result: <strong>{{ result }}</strong></div>
+{% endif %}
+{% if error %}
+  <div class="alert alert-danger mt-3">{{ error }}</div>
+{% endif %}
+{% endblock %}

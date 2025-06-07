@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+{% block content %}
+<h2>Calculation History</h2>
+{% if history %}
+  <ul class="list-group">
+  {% for record in history %}
+    <li class="list-group-item">{{ record }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No history yet.</p>
+{% endif %}
+{% endblock %}
