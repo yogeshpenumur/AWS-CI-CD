@@ -54,6 +54,7 @@ def register():
         return redirect(url_for('login'))
     return render_template("register.html", form=form)
 
+<<<<<<< HEAD
 @app.route('/student')
 @login_required
 def student_dashboard():
@@ -87,3 +88,7 @@ if __name__ == "__main__":
     if not os.path.exists("db.sqlite3"):
         db.create_all()
     app.run(debug=True, host='0.0.0.0', port=9111)
+=======
+if __name__ == '__main__':
+     app.run(debug=True, host='0.0.0.0', port=9111)
+>>>>>>> 87510099a13e1c58ef972930c509775b8131eff4

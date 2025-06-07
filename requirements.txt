@@ -1,4 +1,8 @@
 Flask==2.3.3
+<<<<<<< HEAD
 Flask-WTF==1.1.1
 Flask-SQLAlchemy==3.1.1
 Flask-Login==0.6.3
+=======
+
+>>>>>>> 87510099a13e1c58ef972930c509775b8131eff4
