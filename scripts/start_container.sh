@@ -3,7 +3,7 @@ set -e
 
 IMAGE_NAME="yogeshpenumur/simple-python-flask-app"
 CONTAINER_NAME="flask-app"
-PORT=5000
+PORT=9111
 
 # Stop and remove old container using the same name (if exists)
 if docker ps -a --format '{{.Names}}' | grep -w "$CONTAINER_NAME" > /dev/null; then
@@ -25,5 +25,5 @@ echo "Pulling latest image: $IMAGE_NAME"
 docker pull "$IMAGE_NAME"
 
 # Run the new container
-echo "Starting new container: $CONTAINER_NAME"
-docker run -d --name "$CONTAINER_NAME" -p $PORT:5000 "$IMAGE_NAME"
+echo "Starting new container: $CONTAINER_NAME"  
+docker run -d --name "$CONTAINER_NAME" -p $PORT:9111 "$IMAGE_NAME"
